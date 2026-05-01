@@ -1,4 +1,4 @@
-<img width="300" height="289" alt="steam_news_bot_routing_v5(1)" src="https://github.com/user-attachments/assets/fadae143-d354-4fc9-8378-da484e5361e2" />---
+---
 title: Steam News Summarizer
 emoji: 🏢
 colorFrom: red
@@ -19,6 +19,7 @@ The Problem — What frustration or need motivated this? Why does it matter? (1 
 On Steam the only way to learn if a developer has posted news related to a game your interested in is to manually check each game of interest. Which is fine if you are looking at 2-3 games and tedious if you are looking at 10-12. I like learning when developers update games and add new features but don't make it a habit to check if they have because it's tedious, this application makes it easier to learn about the most recent news related to games I like.
 
 How It Works — A diagram or description of your bot's routing logic. Show which tools exist and how the bot decides which one to use.
+<img width="300" height="289" alt="steam_news_bot_routing_v5(1)" src="https://github.com/user-attachments/assets/fadae143-d354-4fc9-8378-da484e5361e2" />
 ![Uploading steam_news_bot_routing_v5<svg width="100%" viewBox="0 0 684 660" role="img" style="" xmlns="http://www.w3.org/2000/svg">
   <title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Steam News Bot routing logic v5</title>
   <desc style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Flowchart where catalog_lookup branches into two arrows: one to save the game (add game category) and one to fetch news (quick lookup and check followed).</desc>
