@@ -19,10 +19,7 @@ import config
 # LLM Setup
 # -----------------------------------------------------------------------------
 
-_llm = ChatGoogleGenerativeAI(
-    model=config.LLM_MODEL,
-    temperature=config.CLASSIFIER_TEMPERATURE,
-)
+_classifier_chain = None
 
 _classifier_prompt = ChatPromptTemplate.from_template("""
 You are a routing assistant for a Steam game news bot.
@@ -64,7 +61,15 @@ User message: {message}
 
 Category:""")
 
-_classifier_chain = _classifier_prompt | _llm
+def _get_classifier_chain():
+    global _classifier_chain
+    if _classifier_chain is None:
+        _llm = ChatGoogleGenerativeAI(
+            model=config.LLM_MODEL,
+            temperature=config.CLASSIFIER_TEMPERATURE,
+        )
+        _classifier_chain = _classifier_prompt | _llm
+    return _classifier_chain
 
 
 # -----------------------------------------------------------------------------
@@ -119,7 +124,7 @@ def classify(message: str) -> str:
         >>> classify("What's new with Stardew Valley?")
         "QUICK_LOOKUP"
     """
-    result = _classifier_chain.invoke({"message": message})
+    result = _get_classifier_chain().invoke({"message": message})
     raw = _extract_text(result.content).strip().upper()
 
     # Match against valid categories — handles extra whitespace or punctuation

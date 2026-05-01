@@ -33,10 +33,7 @@ from modules import summarizer
 # Runs before catalog_lookup for ADD_GAME and QUICK_LOOKUP branches.
 # Takes the raw user message and returns just the game name as a clean string.
 
-_llm = ChatGoogleGenerativeAI(
-    model=config.LLM_MODEL,
-    temperature=config.CLASSIFIER_TEMPERATURE,
-)
+_extract_chain = None
 
 _extract_prompt = ChatPromptTemplate.from_template("""
 You are helping extract a game title from a user's message.
@@ -51,7 +48,16 @@ Instructions:
 
 Game title:""")
 
-_extract_chain = _extract_prompt | _llm
+
+def _get_extract_chain():
+    global _extract_chain
+    if _extract_chain is None:
+        _llm = ChatGoogleGenerativeAI(
+            model=config.LLM_MODEL,
+            temperature=config.CLASSIFIER_TEMPERATURE,
+        )
+        _extract_chain = _extract_prompt | _llm
+    return _extract_chain
 
 
 def _extract_game_name(message: str) -> str | None:
@@ -66,7 +72,7 @@ def _extract_game_name(message: str) -> str | None:
         "What's new with Fallout New Vegas?"    → "Fallout New Vegas"
         "Any updates?"                          → None
     """
-    result = _extract_chain.invoke({"message": message})
+    result = _get_extract_chain().invoke({"message": message})
     extracted = result.content.strip()
 
     if extracted == "NO_GAME" or not extracted:

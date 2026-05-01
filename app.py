@@ -30,12 +30,15 @@ def _get_followed_list_text() -> str:
 # Chat Handler
 # -----------------------------------------------------------------------------
 
+import os
+
 def chat(message: str, history: list) -> tuple[str, str]:
-    """
-    Chat handler for gr.ChatInterface.
-    Returns the bot response string and updated followed-games list.
-    ChatInterface manages history automatically.
-    """
+    if not os.getenv("GOOGLE_API_KEY"):
+        return (
+            "⚠️ No API key configured. If you're running this on Hugging Face Spaces, "
+            "go to Settings → Variables and Secrets and add your GOOGLE_API_KEY.",
+            _get_followed_list_text()
+        )
     response = router.handle_message(message)
     return response, _get_followed_list_text()
 

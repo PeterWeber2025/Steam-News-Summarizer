@@ -16,10 +16,7 @@ import config
 # LLM Setup
 # -----------------------------------------------------------------------------
 
-_llm = ChatGoogleGenerativeAI(
-    model=config.LLM_MODEL,
-    temperature=config.SUMMARIZER_TEMPERATURE,
-)
+_summarize_chain = None
 
 _summarize_prompt = ChatPromptTemplate.from_template("""
 You are a gaming news assistant summarizing official developer posts from Steam.
@@ -42,7 +39,15 @@ Instructions:
 
 Summary:""")
 
-_summarize_chain = _summarize_prompt | _llm
+def _get_summarize_chain():
+    global _summarize_chain
+    if _summarize_chain is None:
+        _llm = ChatGoogleGenerativeAI(
+            model=config.LLM_MODEL,
+            temperature=config.SUMMARIZER_TEMPERATURE,
+        )
+        _summarize_chain = _summarize_prompt | _llm
+    return _summarize_chain
 
 
 # -----------------------------------------------------------------------------
@@ -109,14 +114,11 @@ def summarize_game_news(game_name: str, posts: list[dict]) -> str:
 
     posts_text = _format_posts_for_prompt(posts)
 
-    result = _llm.invoke(
-        _summarize_chain.invoke({
-            "game_name": game_name,
-            "posts_text": posts_text,
-        }).content
-    )
+    result = _get_summarize_chain().invoke({
+        "game_name": game_name,
+        "posts_text": posts_text,
+    })
 
-    # _summarize_chain already returns an AIMessage — extract text
     summary_text = result.content.strip()
 
     return f"{header}\n{summary_text}"
