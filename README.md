@@ -10,4 +10,28 @@ pinned: false
 short_description: A way to automatically get recent new on Steam games
 ---
 
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+huggingface link: https://huggingface.co/spaces/Peter-W2004/Steam-News-Summarizer
+
+Overview — What does this bot do and who is it for? (2–3 sentences)
+This bot provides a way to quickly find the most recent news from the developers of games your interested in by calling the Steam API and using an LLM + Gradio.
+
+The Problem — What frustration or need motivated this? Why does it matter? (1 paragraph)
+On Steam the only way to learn if a developer has posted news related to a game your interested in is to manually check each game of interest. Which is fine if you are looking at 2-3 games and tedious if you are looking at 10-12. I like learning when developers update games and add new features but don't make it a habit to check if they have because it's tedious, this application makes it easier to learn about the most recent news related to games I like.
+
+How It Works — A diagram or description of your bot's routing logic. Show which tools exist and how the bot decides which one to use.
+-image
+
+Key Findings / What I Learned — What surprised you? What was harder than expected? What would you do differently? (1–2 paragraphs)
+Figuring out the routing logic of my bot, Gradio UI formatting.
+
+
+Sample Conversations — Pull 3–4 real exchanges from your conversation logs that show each tool being triggered. Format them clearly so a reader can follow along.
+WIP
+
+How to Run — Dependencies, setup instructions, how to launch the Gradio interface.
+Either download the repo, and a file titled "key.env" which contains a variable titled GOOGLE_API_KEY, and it's corresponding value, or click the link on hugging space and make sure you have a secret titled GOOGLE_API_KEY, with you API key.
+
+You can make a GOOGLE_API_KEY here: https://aistudio.google.com/api-keys
+
+Who Would Care — A brief paragraph on who would find this useful and what decisions it could inform.
+People who enjoy tracking news related to games they enjoy might appreciate this. It could be helpful with determining what games to play (based on what's been updated recently/added new content).
