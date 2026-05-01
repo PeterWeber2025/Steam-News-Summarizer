@@ -21,11 +21,11 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 
 import config
-import classifier
-import catalog_lookup
-import game_list
-import steam_api
-import summarizer
+from modules import classifier
+from modules import catalog_lookup
+from modules import game_list
+from modules import steam_api
+from modules import summarizer
 
 # -----------------------------------------------------------------------------
 # Game Name Extractor

@@ -8,8 +8,8 @@
 # =============================================================================
 
 import gradio as gr
-import game_list
-import router
+from modules import game_list
+from modules import router
 
 # -----------------------------------------------------------------------------
 # UI Helper
