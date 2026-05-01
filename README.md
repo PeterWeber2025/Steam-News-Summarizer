@@ -19,7 +19,7 @@ The Problem — What frustration or need motivated this? Why does it matter? (1 
 On Steam the only way to learn if a developer has posted news related to a game your interested in is to manually check each game of interest. Which is fine if you are looking at 2-3 games and tedious if you are looking at 10-12. I like learning when developers update games and add new features but don't make it a habit to check if they have because it's tedious, this application makes it easier to learn about the most recent news related to games I like.
 
 How It Works — A diagram or description of your bot's routing logic. Show which tools exist and how the bot decides which one to use.
-<img width="300" height="289" alt="steam_news_bot_routing_v5(1)" src="https://github.com/user-attachments/assets/fadae143-d354-4fc9-8378-da484e5361e2" />
+<img width="800" height="289" alt="steam_news_bot_routing_v5(1)" src="https://github.com/user-attachments/assets/fadae143-d354-4fc9-8378-da484e5361e2" />
 
 Key Findings / What I Learned — What surprised you? What was harder than expected? What would you do differently? (1–2 paragraphs)
 Figuring out the routing logic of my bot, Gradio UI formatting.
