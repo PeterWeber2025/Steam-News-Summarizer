@@ -154,6 +154,7 @@ with gr.Blocks(title="Steam News Bot") as demo:
                     "Any recent posts from the Elden Ring team?",
                     "Check updates for Cyberpunk 2077",
                 ],
+                cache_examples=False,
                 submit_btn="Send",
             )
 
