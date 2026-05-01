@@ -87,10 +87,7 @@ def _get_candidates(game_name: str, df: pd.DataFrame, max_candidates: int = 20) 
 # LLM Matching
 # -----------------------------------------------------------------------------
 
-_llm = ChatGoogleGenerativeAI(
-    model=config.LLM_MODEL,
-    temperature=config.CLASSIFIER_TEMPERATURE,
-)
+_match_chain = None
 
 _match_prompt = ChatPromptTemplate.from_template("""
 You are helping match a user's game name to the correct entry in a Steam game catalog.
@@ -108,7 +105,15 @@ Instructions:
 
 Best match:""")
 
-_match_chain = _match_prompt | _llm
+def _get_match_chain():
+    global _match_chain
+    if _match_chain is None:
+        _llm = ChatGoogleGenerativeAI(
+            model=config.LLM_MODEL,
+            temperature=config.CLASSIFIER_TEMPERATURE,
+        )
+        _match_chain = _match_prompt | _llm
+    return _match_chain
 
 
 def _llm_pick_best(user_input: str, candidates: list[str]) -> str | None:
@@ -117,7 +122,7 @@ def _llm_pick_best(user_input: str, candidates: list[str]) -> str | None:
     Returns the matched name string, or None if no match was found.
     """
     candidates_text = "\n".join(f"- {c}" for c in candidates)
-    result = _match_chain.invoke({
+    result = _get_match_chain().invoke({
         "user_input": user_input,
         "candidates": candidates_text,
     })
